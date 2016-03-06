@@ -1,11 +1,10 @@
 {
-  "name": "Este",
+  "name": "cmsbl",
   "authors": [
-    "Daniel Steigerwald"
+    "Stephen Friend"
   ],
-  "description": "Dev stack and starter kit for React universal web apps",
+  "description": "The source code for https://chesmsbl.org",
   "private": true,
-  "//": "Use gulp for dev. It's cross platform.",
   "scripts": {
     "build": "gulp build",
     "install": "gulp fix-react-native",
@@ -44,6 +43,7 @@
     "cors": "^2.6.0",
     "css-loader": "^0.23.0",
     "del": "^2.1.0",
+    "eslint": "~2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-loader": "^1.1.1",
     "eslint-plugin-babel": "^3.0.0",
