@@ -7,6 +7,13 @@ import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { onAppComponentDidMount } from '../../common/app/actions';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import cmsblTheme from '../lib/themes/cmsbl';
+
+
+injectTapEventPlugin();
 
 class App extends Component {
 
@@ -15,6 +22,16 @@ class App extends Component {
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
   };
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object,
+  };
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getMuiTheme(cmsblTheme),
+    };
+  }
 
   // Note pattern how actions related to app start are dispatched.
   // componentDidMount is not called in ReactDOMServer.renderToString, so it's
@@ -36,9 +53,11 @@ class App extends Component {
           ]}
           meta={[{
             name: 'description',
-            content: 'Dev stack and starter kit for functional and universal React web apps'
+            content: 'Founded in 1989, the Chesapeake MSBL is a ' +
+              '501(c)3 Non-Profit Corporation located in Maryland ' +
+              'and celebrates 28 years of amateur adult baseball in 2016.'
           }]}
-          titleTemplate="%s - Este.js"
+          titleTemplate="%s - Chesapeake Men's Senior Baseball League"
         />
         {/* Pass location to ensure header active links are updated. */}
         <Header location={location} />

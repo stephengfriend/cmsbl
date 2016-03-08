@@ -9,7 +9,8 @@
     "build": "gulp build",
     "install": "gulp fix-react-native",
     "postinstall": "gulp build --production",
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "node src/server"
   },
   "engines": {
     "node": ">=5"
@@ -76,7 +77,8 @@
     "less": "^2.5.1",
     "less-loader": "^2.0.0",
     "make-error": "^1.0.4",
-    "nconf": "^0.8.4",
+    "material-ui": "^0.14.4",
+    "nconf": "^0.8.1",
     "node-sass": "^3.1.2",
     "nodemon": "^1.8.1",
     "normalize.css": "^4.1.1",
@@ -94,6 +96,7 @@
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",
+    "react-tap-event-plugin": "^0.2.2",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.0.5",

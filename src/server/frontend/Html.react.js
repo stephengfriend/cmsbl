@@ -31,11 +31,24 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');` }}
       />;
 
+    const robotoFont = (<script dangerouslySetInnerHTML={{ __html: `
+var WebFontConfig = { google: { families: [ 'Roboto:400,300,500:latin' ] } };
+(function() { var wf = document.createElement('script');
+wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+'://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+wf.type = 'text/javascript'; wf.async = 'true';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(wf, s); })();` }}
+    />);
+
     return (
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
-          <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+          <meta
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+            name="viewport"
+          />
           <meta content="ie=edge" httpEquiv="x-ua-compatible" />
           {helmet.title.toComponent()}
           {helmet.base.toComponent()}
@@ -44,6 +57,7 @@ ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');` }}
           {helmet.script.toComponent()}
           {linkStyles}
           {analytics}
+          {robotoFont}
         </head>
         <body dangerouslySetInnerHTML={{ __html: bodyHtml }} />
       </html>

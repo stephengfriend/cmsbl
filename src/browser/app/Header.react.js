@@ -1,31 +1,32 @@
 import Component from 'react-pure-render/component';
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 import { connect } from 'react-redux';
 
 class Header extends Component {
-
-  static propTypes = {
-    msg: PropTypes.object.isRequired,
-    viewer: PropTypes.object
-  };
-
   render() {
-    const { msg, viewer } = this.props;
-
     return (
       <header>
-        <h1>
-          <Link to="/">{msg.home}</Link>
-        </h1>
-        <ul>
-          <li><Link activeClassName="active" to="/firebase">{msg.firebase}</Link></li>
-          <li><Link activeClassName="active" to="/todos">{msg.todos}</Link></li>
-          <li><Link activeClassName="active" to="/me">{msg.me}</Link></li>
-          {!viewer &&
-            <li><Link activeClassName="active" to="/login">{msg.login}</Link></li>
+        <AppBar
+          title="Chesapeake Men's Senior Baseball League"
+          iconElementRight={
+            <IconMenu
+              iconButtonElement={
+                <IconButton><MoreVertIcon /></IconButton>
+              }
+              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+            >
+              <MenuItem primaryText="Refresh" />
+              <MenuItem primaryText="Help" />
+              <MenuItem primaryText="Sign out" />
+            </IconMenu>
           }
-        </ul>
+        />
       </header>
     );
   }

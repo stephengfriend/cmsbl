@@ -1,7 +1,7 @@
 export default {
   app: {
     footer: {
-      madeByHtml: 'made by <a href="https://twitter.com/steida">steida</a>'
+      madeByHtml: ''
     },
     links: {
       firebase: 'Firebase',
@@ -50,7 +50,7 @@ export default {
       Press CMD+R to reload
       Press CMD+D for debug menu
     `,
-    title: 'Este.js',
+    title: 'Chesapeake Men\'s Senior Baseball League',
     toCheck: {
       andMuchMore: 'And much more :-)',
       h2: 'Things to Check',

@@ -80,6 +80,9 @@ const renderPage = (store, renderProps, req) => {
 };
 
 export default function render(req, res, next) {
+  GLOBAL.navigator = {
+    userAgent: req.headers['user-agent']
+  };
   // Detect Heroku protocol
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const initialState = {
