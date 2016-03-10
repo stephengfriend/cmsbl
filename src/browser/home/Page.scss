@@ -1,0 +1,30 @@
+.cmsbl-more-section {
+  display: block;
+  position: relative;
+  max-width: 1044px;
+  margin-top: 3em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cmsbl-play-ball-section {
+  position: relative;
+  background: url('./old-glove.png') center top no-repeat;
+  background-size: cover;
+  height: 800px;
+
+  .cmsbl-play-ball-band {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+    .cmsbl-play-ball-band-text {
+      max-width: 800px;
+      margin-left: 25%;
+      padding: 24px;
+      text-align: left;
+      color: white;
+    }
+  }
+}

@@ -1,53 +1,98 @@
-export const LOGIN_ERROR = 'LOGIN_ERROR';
-export const LOGIN_START = 'LOGIN_START';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGOUT = 'LOGOUT';
+export const SHOW_LOCK = 'SHOW_LOCK';
+export const LOCK_SUCCESS = 'LOCK_SUCCESS';
+export const LOCK_ERROR = 'LOCK_ERROR';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-export function login(fields) {
-  return ({ fetch, validate }) => {
-    // Why function? https://phabricator.babeljs.io/T2765
-    async function getPromise() {
-      try {
-        await validate(fields)
-          .prop('email')
-          .required()
-          .email()
-          .prop('password')
-          .required()
-          .simplePassword()
-          .promise;
-        // Sure we can use smarter api than raw fetch.
-        const response = await fetch('/api/v1/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(fields)
-        });
-        if (response.status !== 200) throw response;
-        // Return JSON response.
-        return response.json();
-      } catch (error) {
-        // Here we can transforn error statuses to custom errors.
-        if (error.status === 401) {
-          throw validate.wrongPassword('password');
-        }
-        throw error;
-      }
-    }
-
-    return {
-      type: 'LOGIN',
-      payload: {
-        promise: getPromise()
-      }
-    };
+function showLock() {
+  return {
+    type: SHOW_LOCK
   };
 }
 
-export function logout() {
-  return ({ firebase }) => {
-    firebase.unauth();
-    return {
-      type: LOGOUT
-    };
+function lockSuccess(profile, token) {
+  return {
+    type: LOCK_SUCCESS,
+    profile,
+    token
+  };
+}
+
+function lockError(err) {
+  return {
+    type: LOCK_ERROR,
+    err
+  };
+}
+
+function requestLogout() {
+  return {
+    type: LOGOUT_REQUEST,
+    isFetching: true,
+    isAuthenticated: true
+  };
+}
+
+function receiveLogout() {
+  return {
+    type: LOGOUT_SUCCESS,
+    isFetching: false,
+    isAuthenticated: false
+  };
+}
+
+export function register() {
+  const Auth0Lock = require('auth0-lock');
+  const lock = new Auth0Lock('p2C9MVQtRjdbT7sRsBXOLsfrMJnLJucH', 'cmsbl.auth0.com'); // eslint-disable-line
+  return ({ dispatch }) => {
+    dispatch(showLock);
+    lock.showSignup({
+      icon: require('./logo_small.png'),
+      socialBigButtons: true,
+      popup: true,
+      loginAfterSignup: true,
+      rememberLastLogin: true
+    }, (err, profile, token) => {
+      if (err) {
+        dispatch(lockError(err));
+        return;
+      }
+      localStorage.setItem('profile', JSON.stringify(profile));
+      localStorage.setItem('id_token', token);
+      dispatch(lockSuccess(profile, token));
+    });
+  };
+}
+
+export function login() {
+  const Auth0Lock = require('auth0-lock');
+  const lock = new Auth0Lock('p2C9MVQtRjdbT7sRsBXOLsfrMJnLJucH', 'cmsbl.auth0.com'); // eslint-disable-line
+  return ({ dispatch }) => {
+    dispatch(showLock);
+    lock.show({
+      icon: require('./logo_small.png'),
+      socialBigButtons: true,
+      popup: true,
+      loginAfterSignup: true,
+      rememberLastLogin: true
+    }, (err, profile, token) => {
+      if (err) {
+        dispatch(lockError(err));
+        return;
+      }
+      localStorage.setItem('profile', JSON.stringify(profile));
+      localStorage.setItem('id_token', token);
+      dispatch(lockSuccess(profile, token));
+    });
+  };
+}
+
+// Logs the user out
+export function logoutUser() {
+  return ({ dispatch }) => {
+    dispatch(requestLogout());
+    localStorage.removeItem('id_token');
+    dispatch(receiveLogout());
   };
 }

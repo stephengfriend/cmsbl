@@ -54,6 +54,18 @@ export default function makeConfig(isDevelopment) {
     },
     module: {
       loaders: [{
+        test: /node_modules\/auth0-lock\/.*\.js$/,
+        loaders: [
+          'transform-loader/cacheable?brfs',
+          'transform-loader/cacheable?packageify'
+        ]
+      }, {
+        test: /node_modules\/auth0-lock\/.*\.ejs$/,
+        loader: 'transform-loader/cacheable?ejsify'
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }, {
         loader: 'url-loader?limit=10000',
         test: /\.(gif|jpg|png|svg)$/
       }, {
@@ -129,7 +141,7 @@ export default function makeConfig(isDevelopment) {
     })(),
     postcss: () => [autoprefixer({ browsers: 'last 2 version' })],
     resolve: {
-      extensions: ['', '.js'], // .json is ommited to ignore ./firebase.json
+      extensions: ['', '.js'],
       modulesDirectories: ['src', 'node_modules'],
       root: constants.ABSOLUTE_BASE,
       alias: {

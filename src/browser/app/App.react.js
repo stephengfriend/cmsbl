@@ -1,73 +1,65 @@
 /* eslint-disable global-require */
 import './App.scss';
-import Component from 'react-pure-render/component';
-import Footer from './Footer.react';
 import Header from './Header.react';
+import Drawer from './Drawer.react';
+import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { onAppComponentDidMount } from '../../common/app/actions';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import cmsblTheme from '../lib/themes/cmsbl';
-
-
-injectTapEventPlugin();
 
 class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string
   };
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  };
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getMuiTheme(cmsblTheme),
-    };
-  }
-
-  // Note pattern how actions related to app start are dispatched.
-  // componentDidMount is not called in ReactDOMServer.renderToString, so it's
-  // the right place to dispatch client only (e.g. Firebase) actions.
-  // Firebase can be used on the server as well, but it's over of this example.
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(onAppComponentDidMount());
-  }
 
   render() {
-    const { children, location } = this.props;
+    const { children, dispatch, location, isAuthenticated, errorMessage } = this.props;
 
     return (
-      <div className="page">
-        <Helmet
-          link={[
-            { rel: 'shortcut icon', href: require('./favicon.ico') }
-          ]}
-          meta={[{
-            name: 'description',
-            content: 'Founded in 1989, the Chesapeake MSBL is a ' +
-              '501(c)3 Non-Profit Corporation located in Maryland ' +
-              'and celebrates 28 years of amateur adult baseball in 2016.'
-          }]}
-          titleTemplate="%s - Chesapeake Men's Senior Baseball League"
-        />
-        {/* Pass location to ensure header active links are updated. */}
-        <Header location={location} />
-        {children}
-        <Footer />
+      <div>
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+          <Helmet
+            link={[
+              { rel: 'shortcut icon', href: require('./favicon.ico') }
+            ]}
+            meta={[{
+              name: 'description',
+              content: 'Founded in 1989, the Chesapeake MSBL is a ' +
+                '501(c)3 Non-Profit Corporation located in Maryland ' +
+                'and celebrates 28 years of amateur adult baseball in 2016.'
+            }]}
+            titleTemplate="%s - Chesapeake Men's Senior Baseball League"
+          />
+          {/* Pass location to ensure header active links are updated. */}
+          <Header
+            dispatch={dispatch}
+            location={location}
+            isAuthenticated={isAuthenticated}
+            errorMessage={errorMessage}
+          />
+          <Drawer />
+          {children}
+        </div>
       </div>
     );
   }
 
 }
 
+function mapStateToProps(state) {
+  const { auth } = state;
+  const { isAuthenticated, errorMessage } = auth;
+
+  return {
+    isAuthenticated,
+    errorMessage
+  };
+}
+
 // Just inject dispatch.
-export default connect()(App);
+export default connect(mapStateToProps)(App);

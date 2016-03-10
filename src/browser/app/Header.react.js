@@ -1,39 +1,83 @@
 import Component from 'react-pure-render/component';
-import React from 'react';
-import AppBar from 'material-ui/lib/app-bar';
-import IconButton from 'material-ui/lib/icon-button';
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/lib/menus/menu-item';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { login, logoutUser } from '../../common/auth/actions';
+
 class Header extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string
+  }
+
+  constructor(props) {
+    super(props);
+    this.signIn = this.signIn.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  signIn(evt) {
+    evt.preventDefault();
+    this.props.dispatch(login());
+  }
+
+  logout(evt) {
+    evt.preventDefault();
+    this.props.dispatch(logoutUser());
+  }
+
   render() {
+    const { isAuthenticated } = this.props;
+
     return (
-      <header>
-        <AppBar
-          title="Chesapeake Men's Senior Baseball League"
-          iconElementRight={
-            <IconMenu
-              iconButtonElement={
-                <IconButton><MoreVertIcon /></IconButton>
-              }
-              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            >
-              <MenuItem primaryText="Refresh" />
-              <MenuItem primaryText="Help" />
-              <MenuItem primaryText="Sign out" />
-            </IconMenu>
-          }
-        />
+      <header className="cmsbl-header mdl-layout__header">
+        <div className="mdl-layout-icon"></div>
+        <div className="mdl-layout__header-row">
+          <span className="mdl-layout-title">Chesapeake Men's Senior Baseball League</span>
+          <div className="mdl-layout-spacer"></div>
+          <nav className="mdl-navigation mdl-layout--large-screen-only">
+            <a
+              className="mdl-navigation__link mdl-typography--text-uppercase"
+              href="#"
+            >News</a>
+            <a
+              className="mdl-navigation__link mdl-typography--text-uppercase"
+              href="#"
+            >Scores</a>
+            <a
+              className="mdl-navigation__link mdl-typography--text-uppercase"
+              href="#"
+            >Standings</a>
+            <a
+              className="mdl-navigation__link mdl-typography--text-uppercase"
+              href="#"
+            >FAQ</a>
+            <a
+              className="mdl-navigation__link mdl-typography--text-uppercase"
+              href="#"
+            >Contact</a>
+            {!isAuthenticated
+              ?
+              <a
+                className="mdl-navigation__link mdl-typography--text-uppercase"
+                href=""
+                onClick={this.signIn}
+              >Sign In</a>
+              :
+              <a
+                className="mdl-navigation__link mdl-typography--text-uppercase"
+                href=""
+                onClick={this.logout}
+              >Logout</a>
+            }
+          </nav>
+        </div>
       </header>
     );
   }
 
 }
 
-export default connect(state => ({
-  msg: state.intl.msg.app.links,
-  viewer: state.users.viewer
-}))(Header);
+export default connect()(Header);

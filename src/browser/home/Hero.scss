@@ -1,0 +1,21 @@
+.hero-section {
+  display: block;
+  position: relative;
+  height: 640px;
+  width: auto;
+  background-position: center center;
+  background-size: cover;
+
+  .hero-content {
+    display: block;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+    text-align: center;
+
+    img {
+      height: 28rem;
+      width: auto;
+    }
+  }
+}

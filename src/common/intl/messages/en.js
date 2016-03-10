@@ -1,10 +1,9 @@
 export default {
   app: {
     footer: {
-      madeByHtml: ''
+      madeByHtml: 'Me!'
     },
     links: {
-      firebase: 'Firebase',
       home: 'Home',
       login: 'Login',
       me: 'Me',

@@ -1,13 +1,12 @@
-import Firebase from 'firebase';
 import appReducer from './app/reducer';
 import createFetch from './createFetch';
 import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
-import recycle from 'redux-recycle';
 import shortid from 'shortid';
 import validate from './validate';
-import { LOGOUT } from './auth/actions';
 import { applyMiddleware, compose, createStore } from 'redux';
+import * as storage from 'redux-storage';
+import createEngine from 'redux-storage-engine-localstorage';
 
 export default function configureStore(options) {
   const {
@@ -15,12 +14,6 @@ export default function configureStore(options) {
     platformDeps = {},
     platformMiddleware = []
   } = options;
-
-  const firebase = new Firebase('https://este.firebaseio.com');
-  // // Check whether connection works.
-  // firebase.child('hello-world').set({
-  //   createdAt: Firebase.ServerValue.TIMESTAMP
-  // });
 
   // Este dependency injection middleware. So simple that we don't need a lib.
   // It's like mixed redux-thunk and redux-inject.
@@ -36,19 +29,22 @@ export default function configureStore(options) {
     // Browser is ok with relative url. Server and React Native need absolute.
     (process.env.IS_BROWSER ? '' : 'http://localhost:8000');
 
+  const reducer = storage.reducer(appReducer);
+  const engine = createEngine('cmsbl-storage-key');
+
   const middleware = [
     ...platformMiddleware,
     injectMiddleware({
       ...platformDeps,
       fetch: createFetch(serverUrl),
-      firebase,
       getUid: () => shortid.generate(),
       now: () => Date.now(),
       validate: validate(() => store.getState()) // eslint-disable-line no-use-before-define
     }),
     promiseMiddleware({
       promiseTypeSuffixes: ['START', 'SUCCESS', 'ERROR']
-    })
+    }),
+    storage.createMiddleware(engine)
   ];
 
   // Enable logger only for browser and React Native development.
@@ -74,11 +70,14 @@ export default function configureStore(options) {
     ? compose(applyMiddleware(...middleware), window.devToolsExtension())
     : applyMiddleware(...middleware);
 
-  // Reset app store on logout to its initial state. Because app state can be
-  // persisted in localStorage, recycle on logout is a must.
-  const recycleAppReducer = recycle(appReducer, [LOGOUT]);
+  const store = createReduxStore(createStore)(reducer, initialState);
 
-  const store = createReduxStore(createStore)(recycleAppReducer, initialState);
+  if (typeof localStorage !== 'undefined') {
+    const load = storage.createLoader(engine);
+    load(store)
+    .then((newState) => console.log('Loaded state:', newState))
+      .catch(() => console.log('Failed to load previous state'));
+  }
 
   // Enable hot reload where available.
   if (module.hot) {

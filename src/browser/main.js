@@ -19,7 +19,7 @@ const store = configureStore({
   platformMiddleware: [routerMiddleware(browserHistory)]
 });
 const history = syncHistoryWithStore(browserHistory, store);
-const routes = createRoutes(store.getState);
+const routes = createRoutes();
 
 ReactDOM.render(
   <Provider store={store}>

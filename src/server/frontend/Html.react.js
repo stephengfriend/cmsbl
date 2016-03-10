@@ -31,16 +31,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');` }}
       />;
 
-    const robotoFont = (<script dangerouslySetInnerHTML={{ __html: `
-var WebFontConfig = { google: { families: [ 'Roboto:400,300,500:latin' ] } };
-(function() { var wf = document.createElement('script');
-wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-'://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-wf.type = 'text/javascript'; wf.async = 'true';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(wf, s); })();` }}
-    />);
-
     return (
       <html lang="en">
         <head>
@@ -55,9 +45,12 @@ s.parentNode.insertBefore(wf, s); })();` }}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
           {helmet.script.toComponent()}
+          <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.red-indigo.min.css" />
+          <script defer src="https://code.getmdl.io/1.1.2/material.min.js" />
           {linkStyles}
           {analytics}
-          {robotoFont}
         </head>
         <body dangerouslySetInnerHTML={{ __html: bodyHtml }} />
       </html>

@@ -23,14 +23,10 @@
 - Advanced performance with pure components
 - Well tuned dev stack
 - Universal forms with validation
-- Firebase Redux integration ([este.firebaseapp.com](https://este.firebaseapp.com))
-  - email and facebook login
-  - declarative queryFirebase higher order component for Firebase imperative api
-  - and more
 
 ## Libraries
 
-- [React](http://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/) 
+- [React](http://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/)
 - [Redux](http://rackt.github.io/redux/)
 - [babeljs](https://babeljs.io/)
 - [immutablejs](http://facebook.github.io/immutable-js)
@@ -87,7 +83,6 @@ React Native: [facebook.github.io/react-native/docs/getting-started.html](https:
 - `gulp build -p` build app for production, for example for [Heroku](https://dashboard.heroku.com/)
 - `npm test` run all checks and tests
 - `node src/server` start app, remember to set NODE_ENV and SERVER_URL
-- `gulp to-html` render app to HTML for static hosting like [Firebase](https://www.firebase.com/features.html#features-hosting)
 
 
 ## Documentation
