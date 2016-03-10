@@ -34,11 +34,12 @@ class Page extends Component {
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--3dp">
               <div className="mdl-card__title">
-                <h4 className="mdl-card__title-text">We're so cool!</h4>
+                <h4 className="mdl-card__title-text">Tournaments</h4>
               </div>
               <div className="mdl-card__supporting-text">
                 <span className="mdl-typography--font-light mdl-typography--subhead">
-                  This is the supporting text for the card.
+                  The Chesapeake Men's Senior Baseball League hosts 2 annual tournaments.
+                  Bring your teams to challenge the best that Maryland has to offer.
                 </span>
               </div>
               <div className="mdl-card__actions">
@@ -47,18 +48,18 @@ class Page extends Component {
                   href="#"
                   data-upgraded=",MaterialButton"
                 >
-                   Get Action!
+                   Upcoming Tournaments
                    <i className="material-icons">chevron_right</i>
                  </a>
               </div>
             </div>
             <div className="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--3dp">
               <div className="mdl-card__title">
-                <h4 className="mdl-card__title-text">We're so cool!</h4>
+                <h4 className="mdl-card__title-text">Champions</h4>
               </div>
               <div className="mdl-card__supporting-text">
                 <span className="mdl-typography--font-light mdl-typography--subhead">
-                  This is the supporting text for the card.
+                  Congratulations to the winners of the 2015 season.
                 </span>
               </div>
               <div className="mdl-card__actions">
@@ -67,18 +68,20 @@ class Page extends Component {
                   href="#"
                   data-upgraded=",MaterialButton"
                 >
-                   Get Action!
+                   2015 Results
                    <i className="material-icons">chevron_right</i>
                  </a>
               </div>
             </div>
             <div className="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--3dp">
               <div className="mdl-card__title">
-                <h4 className="mdl-card__title-text">We're so cool!</h4>
+                <h4 className="mdl-card__title-text">Hall of Fame</h4>
               </div>
               <div className="mdl-card__supporting-text">
                 <span className="mdl-typography--font-light mdl-typography--subhead">
-                  This is the supporting text for the card.
+                  The Chesapeake Men's Senior Baseball League enjoys a history of
+                  over 25 years. During that time, we've had the pleasure of meeting
+                  some of the best players in the region.
                 </span>
               </div>
               <div className="mdl-card__actions">
@@ -87,7 +90,7 @@ class Page extends Component {
                   href="#"
                   data-upgraded=",MaterialButton"
                 >
-                   Get Action!
+                   View the Hall of Fame
                    <i className="material-icons">chevron_right</i>
                  </a>
               </div>
