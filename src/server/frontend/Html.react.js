@@ -45,10 +45,14 @@ ga('create', '${googleAnalyticsId}', 'auto'); ga('send', 'pageview');` }}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
           {helmet.script.toComponent()}
-          <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-          <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.red-indigo.min.css" />
-          <script defer src="https://code.getmdl.io/1.1.2/material.min.js" />
+          <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+            type="text/css"
+          />
+          <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
+          <link rel="stylesheet" href="//code.getmdl.io/1.1.2/material.red-indigo.min.css" />
+          <script defer src="//code.getmdl.io/1.1.2/material.min.js" />
           {linkStyles}
           {analytics}
         </head>
