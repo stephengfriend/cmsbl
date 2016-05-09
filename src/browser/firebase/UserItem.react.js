@@ -14,7 +14,7 @@ export default class UserItem extends Component {
     const title = displayName || 'Some user logged in via email';
     return (
       <li>
-        <img src={profileImageURL} title={title} />
+        <img src={profileImageURL} title={title} role="presentation" />
       </li>
     );
   }

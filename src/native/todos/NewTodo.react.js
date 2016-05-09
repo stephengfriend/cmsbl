@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import * as todosActions from '../../common/todos/actions';
 import Component from 'react-pure-render/component';
 import React, { PropTypes, StyleSheet, TextInput, View } from 'react-native';

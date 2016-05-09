@@ -19,7 +19,6 @@ export default function uiReducer(state = initialState, action) {
     case actions.TOGGLE_SIDE_MENU:
       return state.update('isSideMenuOpen', isSideMenuOpen => !isSideMenuOpen);
 
+    default: return state;
   }
-
-  return state;
 }

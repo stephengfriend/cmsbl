@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import Component from 'react-pure-render/component';
 import React from 'react-native';
 

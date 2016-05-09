@@ -18,7 +18,8 @@ export default function deviceReducer(state = initialState, action) {
       return state.set('platform', platform);
     }
 
-  }
+    default:
+      return state;
 
-  return state;
+  }
 }

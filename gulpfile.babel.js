@@ -1,10 +1,12 @@
 /* eslint-disable no-undef, no-console */
 import bg from 'gulp-bg';
+import cp from 'child_process';
 import del from 'del';
 import eslint from 'gulp-eslint';
 import fs from 'fs';
 import gulp from 'gulp';
 import gulpIf from 'gulp-if';
+import http from 'http';
 import mochaRunCreator from './test/mochaRunCreator';
 import os from 'os';
 import path from 'path';
@@ -96,7 +98,7 @@ gulp.task('to-html', done => {
   };
 
   const fetch = url => new Promise((resolve, reject) => {
-    require('http').get({ host: 'localhost', path: url, port: 8000 }, res => {
+    http.get({ host: 'localhost', path: url, port: 8000 }, res => {
       // Explicitly treat incoming data as utf8 (avoids issues with multi-byte).
       res.setEncoding('utf8');
       let body = '';
@@ -126,7 +128,7 @@ gulp.task('to-html', done => {
   };
 
   runSequence('eslint-ci', 'mocha', 'clean', 'build', () => {
-    const proc = require('child_process').spawn('node', ['./src/server']);
+    const proc = cp.spawn('node', ['./src/server']);
     proc.stderr.on('data', data => console.log(data.toString()));
     proc.stdout.on('data', async data => {
       data = data.toString();

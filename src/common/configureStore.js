@@ -84,7 +84,7 @@ export default function configureStore(options) {
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers.
     module.hot.accept('./app/reducer', () => {
-      const nextAppReducer = require('./app/reducer');
+      const nextAppReducer = require('./app/reducer'); // eslint-disable-line global-require
       store.replaceReducer(nextAppReducer);
     });
   }

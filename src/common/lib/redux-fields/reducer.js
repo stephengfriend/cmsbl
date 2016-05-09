@@ -18,7 +18,6 @@ export default function reducer(state = initialState, action) {
       return state.setIn(path, value);
     }
 
+    default: return state;
   }
-
-  return state;
 }

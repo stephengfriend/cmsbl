@@ -34,7 +34,7 @@ class Profile extends Component {
         <h2>Hi {viewer.displayName || viewer.email}!</h2>
         {viewer.profileImageURL &&
           <div className="profile-image">
-            <img src={viewer.profileImageURL} />
+            <img src={viewer.profileImageURL} role="presentation" />
           </div>
         }
         <button

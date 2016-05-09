@@ -20,15 +20,15 @@ global.Promise = Bluebird;
 if (global.Intl) {
   // We don't have to check whether Node runtime supports specific language,
   // because without special build it does support only english anyway.
-  require('intl');
+  require('intl'); // eslint-disable-line global-require
   global.Intl.NumberFormat = global.IntlPolyfill.NumberFormat;
   global.Intl.DateTimeFormat = global.IntlPolyfill.DateTimeFormat;
 } else {
-  global.Intl = require('intl');
+  global.Intl = require('intl'); // eslint-disable-line global-require
 }
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicAssets)
   .development(!serverConfig.isProduction)
   .server(rootDir, () => {
-    require('./main');
+    require('./main'); // eslint-disable-line global-require
   });

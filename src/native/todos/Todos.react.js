@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import * as todosActions from '../../common/todos/actions';
 import Buttons from './Buttons.react';
 import Component from 'react-pure-render/component';

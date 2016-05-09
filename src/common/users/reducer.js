@@ -2,8 +2,7 @@ import * as actions from './actions';
 import * as authActions from '../auth/actions';
 import User from './user';
 import { Record, Seq } from 'immutable';
-import { firebaseActions } from '../lib/redux-firebase';
-import { mapAuthToUser } from '../lib/redux-firebase';
+import { firebaseActions, mapAuthToUser } from '../lib/redux-firebase';
 
 const InitialState = Record({
   list: null,
@@ -48,7 +47,6 @@ export default function usersReducer(state = initialState, action) {
       return state.set('list', list);
     }
 
+    default: return state;
   }
-
-  return state;
 }

@@ -1,4 +1,3 @@
-/* eslint-disable import/default */
 import 'babel-polyfill';
 import Bluebird from 'bluebird';
 import React from 'react';
@@ -7,15 +6,14 @@ import configureStore from '../common/configureStore';
 import createRoutes from './createRoutes';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
 
 const app = document.getElementById('app');
-const initialState = window.__INITIAL_STATE__;
+const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 const store = configureStore({
   initialState,
   platformMiddleware: [routerMiddleware(browserHistory)]

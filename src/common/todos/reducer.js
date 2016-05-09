@@ -55,7 +55,7 @@ export default function todosReducer(state = initialState, action) {
         .updateIn(['map', todo.id, 'completed'], completed => !completed);
     }
 
+    default:
+      return state;
   }
-
-  return state;
 }

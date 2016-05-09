@@ -32,7 +32,6 @@ export default function authReducer(state = initialState, action) {
     case firebaseActions.REDUX_FIREBASE_SIGN_UP_SUCCESS:
       return state.merge({ formDisabled: false, formError: null });
 
+    default: return state;
   }
-
-  return state;
 }

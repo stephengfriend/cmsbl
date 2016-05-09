@@ -51,8 +51,8 @@ class App extends Component {
     switch (route) {
       case routes.home: return links.home;
       case routes.todos: return links.todos;
+      default: throw new Error('Route not found.');
     }
-    throw new Error('Route not found.');
   }
 
   render() {
