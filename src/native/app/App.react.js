@@ -91,10 +91,8 @@ class App extends Component {
 
 }
 
-App = connect(state => ({
+export default connect(state => ({
   device: state.device,
   links: state.intl.msg.app.links,
   ui: state.ui
 }), uiActions)(App);
-
-export default App;

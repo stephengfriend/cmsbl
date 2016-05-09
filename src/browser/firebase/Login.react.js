@@ -134,11 +134,11 @@ class Login extends Component {
 
 }
 
-Login = fields(Login, {
+const loginFields = fields(Login, {
   path: 'auth',
   fields: ['email', 'password']
 });
 
 export default connect(state => ({
   auth: state.auth
-}), firebaseActions)(Login);
+}), firebaseActions)(loginFields);

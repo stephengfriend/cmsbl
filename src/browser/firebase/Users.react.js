@@ -37,7 +37,7 @@ class Users extends Component {
 
 }
 
-Users = queryFirebase(Users, props => ({
+const query = queryFirebase(Users, props => ({
   // Query path to listen. For one user we can use `users/${props.user.id}`.
   path: 'users',
   // Firebase imperative firebase.com/docs/web/api/query as declarative params.
@@ -54,4 +54,4 @@ Users = queryFirebase(Users, props => ({
 
 export default connect(state => ({
   users: state.users.list
-}), usersActions)(Users);
+}), usersActions)(query);

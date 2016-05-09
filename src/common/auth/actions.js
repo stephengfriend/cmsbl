@@ -9,8 +9,12 @@ export function login(fields) {
     async function getPromise() {
       try {
         await validate(fields)
-          .prop('email').required().email()
-          .prop('password').required().simplePassword()
+          .prop('email')
+          .required()
+          .email()
+          .prop('password')
+          .required()
+          .simplePassword()
           .promise;
         // Sure we can use smarter api than raw fetch.
         const response = await fetch('/api/v1/auth/login', {

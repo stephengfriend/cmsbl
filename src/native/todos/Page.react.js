@@ -23,6 +23,4 @@ class Page extends Component {
 
 // Truly universal (not only isomorphic) data fetching.
 // One higher order component for browser, server, and mobile.
-Page = fetch(fetchUserTodos)(Page);
-
-export default Page;
+export default fetch(fetchUserTodos)(Page);

@@ -76,7 +76,7 @@ class Login extends Component {
 
 }
 
-Login = fields(Login, {
+const loginFields = fields(Login, {
   path: 'auth',
   fields: ['email', 'password']
 });
@@ -84,4 +84,4 @@ Login = fields(Login, {
 export default connect(state => ({
   auth: state.auth,
   msg: state.intl.msg.auth.form
-}), { ...authActions, replace })(Login);
+}), { ...authActions, replace })(loginFields);

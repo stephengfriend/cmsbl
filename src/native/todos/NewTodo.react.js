@@ -68,11 +68,9 @@ class NewTodo extends Component {
 
 }
 
-NewTodo = fields(NewTodo, {
-  path: 'newTodo',
-  fields: ['title']
-});
-
 export default connect(state => ({
   msg: state.intl.msg.todos
-}), todosActions)(NewTodo);
+}), todosActions)(fields(NewTodo, {
+  path: 'newTodo',
+  fields: ['title']
+}));

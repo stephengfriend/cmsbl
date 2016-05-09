@@ -45,8 +45,6 @@ class Page extends Component {
 
 }
 
-Page = connect(state => ({
+export default connect(state => ({
   msg: state.intl.msg.home
 }))(Page);
-
-export default Page;
